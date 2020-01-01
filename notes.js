@@ -7,17 +7,18 @@ const getNotes = () => {
 const addNote = (title, body) => {
     const notes = loadNotes()
 
-    const duplicateNotes = notes.filter((note) => {
+    const duplicateNotes = notes.filter((note)=> {
         return note.title === title
     })
 
+   
     if(duplicateNotes.length === 0){
         notes.push({
             title:title,
             body:body
         })
         saveNotes(notes)
-        console.log('New note added!')
+        console.log('New notes Added!')
     }
     else{
         console.log('Note title taken!')
@@ -46,7 +47,18 @@ const loadNotes = () =>{
     
 }
 
+const removeNote = (title) =>{
+    const notes = loadNotes()
+
+    const keepNote = notes.filter((note)=>{
+        return note.title !== title
+    })
+
+    saveNotes(keepNote)
+}
+
 module.exports = {
     getNotes: getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote
 }
